@@ -12,7 +12,7 @@ The test items are played in a continous loop. You can switch between the items 
 To get a useful result, the test items should have common properties:
  - same delay
  - same loudness
- - same length (waning is shown)
+ - same length (warning is shown)
  - same number of channels (enforced)
  - same sampling rate (enforced)
 
