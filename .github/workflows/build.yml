@@ -1,0 +1,20 @@
+name: build
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  linux:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3
+    - name: build
+      run: |
+        wget http://files.portaudio.com/archives/pa_stable_v190700_20210406.tgz
+        tar xf pa_stable_v190700_20210406.tgz
+        (cd portaudio; portaudio/configure --disable-shared --without-jack --without-oss --without-asihpi)
+        make -C portaudio
+        cc -Wall -O2 -s -Iportaudio/include yuleq.c portaudio/lib/.libs/libportaudio.a -pthread -lm -lasound -o yuleq
