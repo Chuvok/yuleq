@@ -18,4 +18,4 @@ jobs:
         tar xf pa_stable_v190700_20210406.tgz
         (cd portaudio; ./configure --disable-shared --without-jack --without-oss --without-asihpi)
         make -C portaudio
-        cc -Wall -O2 -s -Iportaudio/include yuleq.c portaudio/lib/.libs/libportaudio.a -pthread -lm -lasound -o yuleq
+        cc -Wall -Wno-unused-result -O2 -s -Iportaudio/include yuleq.c portaudio/lib/.libs/libportaudio.a -pthread -lm -lasound -o yuleq
