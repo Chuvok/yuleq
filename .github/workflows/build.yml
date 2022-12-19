@@ -19,3 +19,14 @@ jobs:
         (cd portaudio; ./configure -q --disable-shared --without-jack --without-oss --without-asihpi)
         make -C portaudio >/dev/null
         cc -Wall -Wno-unused-result -O2 -s -Iportaudio/include yuleq.c portaudio/lib/.libs/libportaudio.a -pthread -lm -lasound -o yuleq
+  macos:
+    runs-on: macos-10.15
+    steps:
+      - uses: actions/checkout@v3
+      - name: build
+        run: |
+          curl -sO http://files.portaudio.com/archives/pa_stable_v190700_20210406.tgz
+          tar xf pa_stable_v190700_20210406.tgz
+          (cd portaudio; ./configure -q --disable-shared --without-jack)
+          make -C portaudio >/dev/null
+          cc -Wall -Wno-unused-result -O2 -s -Iportaudio/include yuleq.c portaudio/lib/.libs/libportaudio.a -pthread -lm -framework CoreAudio -o yuleq
